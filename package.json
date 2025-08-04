@@ -8,7 +8,8 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "PACKAGE-README.md"
   ],
   "repository": {
     "type": "git",
@@ -52,6 +53,7 @@
     "react-scripts": "5.0.1",
     "rollup": "^4.46.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

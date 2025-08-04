@@ -1,11 +1,10 @@
-import babel from '@rollup/plugin-babel';
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import terser from '@rollup/plugin-terser';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { readFileSync } from 'fs';
-
-const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
+const babel = require('@rollup/plugin-babel');
+const resolve = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
+const terser = require('@rollup/plugin-terser');
+const peerDepsExternal = require('rollup-plugin-peer-deps-external');
+const postcss = require('rollup-plugin-postcss');
+const packageJson = require('./package.json');
 
 const config = {
   input: 'src/lib/index.js',
@@ -24,20 +23,29 @@ const config = {
   plugins: [
     peerDepsExternal(),
     resolve({
-      browser: true
+      browser: true,
+      extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
-    commonjs(),
     babel({
       babelHelpers: 'bundled',
       exclude: 'node_modules/**',
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
       presets: [
-        ['@babel/preset-env', { targets: { node: 'current' } }],
+        ['@babel/preset-env', { 
+          targets: { node: 'current' },
+          modules: false 
+        }],
         ['@babel/preset-react', { runtime: 'automatic' }]
       ]
     }),
+    postcss({
+      extract: true,
+      minimize: true
+    }),
+    commonjs(),
     terser()
   ],
   external: ['react', 'react-dom', 'react-icons/ci', 'react-icons/fa']
 };
 
-export default config;
+module.exports = config;
