@@ -1,0 +1,122 @@
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #000000;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.todo-wrapper {
+  width: 100%;
+  max-width: 500px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  padding: 20px;
+}
+
+.todo-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.todo-submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 15px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  background-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 8px 12px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-text {
+  font-size: 1rem;
+  color: #000000;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.action-btn {
+  border: none;
+  background-color: transparent;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

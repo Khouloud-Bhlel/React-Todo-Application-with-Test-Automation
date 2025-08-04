@@ -1,0 +1,41 @@
+2025-08-04 16:07:40,575 - INFO - ====== WebDriver manager ======
+2025-08-04 16:07:41,421 - INFO - Get LATEST chromedriver version for google-chrome
+2025-08-04 16:07:41,497 - INFO - Get LATEST chromedriver version for google-chrome
+2025-08-04 16:07:41,577 - INFO - Driver [C:\Users\khoul\.wdm\drivers\chromedriver\win64\138.0.7204.183\chromedriver-win32/chromedriver.exe] found in cache
+2025-08-04 16:07:42,775 - INFO - === Starting Todo Application Test Automation ===
+2025-08-04 16:07:42,775 - INFO - Opening Todo application at http://localhost:3000
+2025-08-04 16:07:47,526 - ERROR - [X] Failed to load Todo application: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=138.0.7204.184)
+Stacktrace:
+	GetHandleVerifier [0x0x87ba83+63395]
+	GetHandleVerifier [0x0x87bac4+63460]
+	(No symbol) [0x0x6c2113]
+	(No symbol) [0x0x6bf84b]
+	(No symbol) [0x0x6b30c2]
+	(No symbol) [0x0x6b4af5]
+	(No symbol) [0x0x6b3358]
+	(No symbol) [0x0x6b2e93]
+	(No symbol) [0x0x6b2ba1]
+	(No symbol) [0x0x6b0b44]
+	(No symbol) [0x0x6b14eb]
+	(No symbol) [0x0x6c5b3e]
+	(No symbol) [0x0x751387]
+	(No symbol) [0x0x72f3ac]
+	(No symbol) [0x0x7507ba]
+	(No symbol) [0x0x72f1a6]
+	(No symbol) [0x0x6fe7b2]
+	(No symbol) [0x0x6ff654]
+	GetHandleVerifier [0x0xaf8883+2672035]
+	GetHandleVerifier [0x0xaf3cba+2652634]
+	GetHandleVerifier [0x0x8a2bca+223466]
+	GetHandleVerifier [0x0x892cb8+158168]
+	GetHandleVerifier [0x0x89978d+185517]
+	GetHandleVerifier [0x0x883b78+96408]
+	GetHandleVerifier [0x0x883d02+96802]
+	GetHandleVerifier [0x0x86e90a+9770]
+	BaseThreadInitThunk [0x0x76605d49+25]
+	RtlInitializeExceptionChain [0x0x7754d1ab+107]
+	RtlGetAppContainerNamedObjectPath [0x0x7754d131+561]
+
+2025-08-04 16:07:47,527 - ERROR - === Test Automation Failed ===
+2025-08-04 16:07:52,646 - INFO - Browser closed successfully

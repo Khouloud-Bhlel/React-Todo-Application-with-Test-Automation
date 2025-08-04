@@ -1,0 +1,59 @@
+2025-08-04 16:09:42,403 - INFO - ====== WebDriver manager ======
+2025-08-04 16:09:43,208 - INFO - Get LATEST chromedriver version for google-chrome
+2025-08-04 16:09:43,282 - INFO - Get LATEST chromedriver version for google-chrome
+2025-08-04 16:09:43,355 - INFO - Driver [C:\Users\khoul\.wdm\drivers\chromedriver\win64\138.0.7204.183\chromedriver-win32/chromedriver.exe] found in cache
+2025-08-04 16:09:44,536 - INFO - === Starting Todo Application Test Automation ===
+2025-08-04 16:09:44,536 - INFO - Opening Todo application at http://localhost:3000
+2025-08-04 16:09:45,037 - INFO - [OK] Todo application is ready
+2025-08-04 16:09:45,038 - INFO - [OK] Todo application loaded successfully
+2025-08-04 16:09:45,164 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\01_initial_state_16-09-45.png
+2025-08-04 16:09:45,164 - INFO - --- Adding 5 Todo Items ---
+2025-08-04 16:09:45,165 - INFO - Adding todo 1/5: Complete project documentation
+2025-08-04 16:09:45,632 - INFO - [OK] Added todo: 'Complete project documentation'
+2025-08-04 16:09:46,433 - INFO - Adding todo 2/5: Review code changes
+2025-08-04 16:09:46,927 - INFO - [OK] Added todo: 'Review code changes'
+2025-08-04 16:09:47,728 - INFO - Adding todo 3/5: Schedule team meeting
+2025-08-04 16:09:48,196 - INFO - [OK] Added todo: 'Schedule team meeting'
+2025-08-04 16:09:48,997 - INFO - Adding todo 4/5: Update database schema
+2025-08-04 16:09:49,471 - INFO - [OK] Added todo: 'Update database schema'
+2025-08-04 16:09:50,272 - INFO - Adding todo 5/5: Test new features
+2025-08-04 16:09:50,729 - INFO - [OK] Added todo: 'Test new features'
+2025-08-04 16:09:51,530 - INFO - [OK] Successfully added 5/5 todos
+2025-08-04 16:09:51,637 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\02_after_adding_todos_16-09-51.png
+2025-08-04 16:09:53,638 - INFO - --- Managing Todo Status ---
+2025-08-04 16:09:54,419 - INFO - [OK] Todo 1 marked as completed
+2025-08-04 16:09:56,222 - INFO - [OK] Todo 2 marked as completed
+2025-08-04 16:09:57,308 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\03_after_completing_todos_16-09-57.png
+2025-08-04 16:09:58,078 - INFO - [OK] Todo 1 marked as active
+2025-08-04 16:10:00,183 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\04_after_making_todo1_active_16-10-00.png
+2025-08-04 16:10:00,183 - INFO - --- Deleting Todo ---
+2025-08-04 16:10:00,472 - INFO - [OK] Todo 3 deleted successfully
+2025-08-04 16:10:02,591 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\05_after_deletion_16-10-02.png
+2025-08-04 16:10:02,592 - INFO - --- Updating Todo ---
+2025-08-04 16:10:05,277 - INFO - [OK] Todo 1 updated to: 'UPDATED: High priority task - Modified by automation'
+2025-08-04 16:10:07,383 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\06_after_update_16-10-07.png
+2025-08-04 16:10:07,384 - INFO - --- Testing Filters ---
+2025-08-04 16:10:08,667 - INFO - [OK] Filter 'all' applied successfully
+2025-08-04 16:10:09,685 - INFO - [INFO] Current todo count: 4
+2025-08-04 16:10:09,784 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\07_filter_all_16-10-09.png
+2025-08-04 16:10:11,065 - INFO - [OK] Filter 'active' applied successfully
+2025-08-04 16:10:12,081 - INFO - [INFO] Current todo count: 3
+2025-08-04 16:10:12,180 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\08_filter_active_16-10-12.png
+2025-08-04 16:10:13,487 - INFO - [OK] Filter 'completed' applied successfully
+2025-08-04 16:10:14,504 - INFO - [INFO] Current todo count: 1
+2025-08-04 16:10:14,599 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\09_filter_completed_16-10-14.png
+2025-08-04 16:10:15,881 - INFO - [OK] Filter 'all' applied successfully
+2025-08-04 16:10:16,972 - INFO - [OK] Screenshot saved: C:\project full stack training\my-app\test_automation\screenshots\10_final_state_16-10-16.png
+2025-08-04 16:10:16,972 - INFO - --- Final Test Results ---
+2025-08-04 16:10:16,972 - INFO - Total todos: 4
+2025-08-04 16:10:16,972 - INFO - Active todos: 3
+2025-08-04 16:10:16,973 - INFO - Completed todos: 1
+2025-08-04 16:10:16,973 - INFO - --- Automation Statistics ---
+2025-08-04 16:10:16,973 - INFO - Todos added: 5
+2025-08-04 16:10:16,973 - INFO - Todos completed: 2
+2025-08-04 16:10:16,973 - INFO - Todos deleted: 1
+2025-08-04 16:10:16,974 - INFO - Todos updated: 1
+2025-08-04 16:10:16,974 - INFO - Errors encountered: 0
+2025-08-04 16:10:16,974 - INFO - [OK] Test scenario completed successfully!
+2025-08-04 16:10:16,974 - INFO - === Test Automation Completed Successfully ===
+2025-08-04 16:10:22,178 - INFO - Browser closed successfully
