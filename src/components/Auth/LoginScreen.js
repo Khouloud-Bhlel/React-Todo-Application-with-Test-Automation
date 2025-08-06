@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { FaEye, FaEyeSlash, FaUser, FaLock } from 'react-icons/fa';
 import './styles/LoginScreen.css';
@@ -9,12 +9,7 @@ const LoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const { login, isLoading, loginError, clearError } = useAuth();
-
-  // Clear error when component mounts or inputs change
-  useEffect(() => {
-    clearError();
-  }, [email, password, clearError]);
+  const { login, isLoading, loginError } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,17 +27,12 @@ const LoginScreen = () => {
     setShowPassword(!showPassword);
   };
 
-  const fillDemoCredentials = () => {
-    setEmail('demo@demo.com');
-    setPassword('demo123');
-  };
-
   return (
     <div className="login-container" id="login-container">
       <div className="login-wrapper" id="login-wrapper">
         <div className="login-card" id="login-card">
           <div className="login-header" id="login-header">
-            <h1 className="login-title" id="login-title">Welcome Back</h1>
+            <h1 className="login-title" id="login-title">Welcome</h1>
             <p className="login-subtitle" id="login-subtitle">
               Sign in to access your todos
             </p>
@@ -114,30 +104,6 @@ const LoginScreen = () => {
               )}
             </button>
           </form>
-
-          <div className="demo-section" id="demo-section">
-            <p className="demo-text">Want to try it out?</p>
-            <button
-              type="button"
-              onClick={fillDemoCredentials}
-              className="demo-button"
-              id="demo-button"
-              disabled={isLoading || isSubmitting}
-            >
-              Use Demo Credentials
-            </button>
-          </div>
-
-          <div className="login-footer" id="login-footer">
-            <div className="demo-credentials">
-              <h4>Demo Accounts:</h4>
-              <ul>
-                <li><strong>User:</strong> user@example.com / password123</li>
-                <li><strong>Admin:</strong> admin@example.com / admin123</li>
-                <li><strong>Demo:</strong> demo@demo.com / demo123</li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </div>

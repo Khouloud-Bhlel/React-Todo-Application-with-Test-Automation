@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAuth } from '../Auth/AuthContext';
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';
 import './styles/Header.css';
@@ -7,9 +6,7 @@ const Header = () => {
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to log out?')) {
-      logout();
-    }
+     logout();
   };
 
   return (

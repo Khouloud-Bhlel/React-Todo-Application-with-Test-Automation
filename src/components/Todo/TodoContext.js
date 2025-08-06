@@ -1,40 +1,16 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
+import { storeTodos, getTodos } from '../../utils/secureStorage';
 import todosReducer from './hooks/todosReducer';
 
-// Create the TodoContext
 const TodoContext = createContext();
 
-// Storage utilities
-const STORAGE_KEY = process.env.REACT_APP_STORAGE_KEY || 'todos';
-
-const loadTodosFromStorage = () => {
-  try {
-    const savedTodos = localStorage.getItem(STORAGE_KEY);
-    return savedTodos ? JSON.parse(savedTodos) : [];
-  } catch (error) {
-    console.error('Error loading todos from localStorage:', error);
-    return [];
-  }
-};
-
-const saveTodosToStorage = (todos) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-  } catch (error) {
-    console.error('Error saving todos to localStorage:', error);
-  }
-};
-
-// TodoProvider component
 export const TodoProvider = ({ children }) => {
-  const [todos, dispatch] = useReducer(todosReducer, [], loadTodosFromStorage);
+  const [todos, dispatch] = useReducer(todosReducer, [], getTodos);
 
-  // Save todos to localStorage whenever todos change
   useEffect(() => {
-    saveTodosToStorage(todos);
+    storeTodos(todos);
   }, [todos]);
 
-  // Actions
   const addTodo = (text) => {
     dispatch({
       type: 'added',
@@ -79,7 +55,6 @@ export const TodoProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use the TodoContext
 export const useTodoContext = () => {
   const context = useContext(TodoContext);
   if (!context) {

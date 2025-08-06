@@ -1,79 +1,54 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { storeUser, getUser, isAuthenticated, clearAllSecureData } from '../../utils/secureStorage';
 
-// Create the AuthContext
 const AuthContext = createContext();
 
-// Storage key for user data
-const AUTH_STORAGE_KEY = 'todoApp_user';
-
-// Mock user database (in a real app, this would be a backend API)
 const MOCK_USERS = [
   { id: 1, email: 'khouloudbhlel@gmail.com', password: 'Khouloud123@', name: 'khouloud ben hlel' }
 ];
 
-// Load user from localStorage
-const loadUserFromStorage = () => {
-  try {
-    const savedUser = localStorage.getItem(AUTH_STORAGE_KEY);
-    return savedUser ? JSON.parse(savedUser) : null;
-  } catch (error) {
-    console.error('Error loading user from localStorage:', error);
-    return null;
-  }
-};
-
-// Save user to localStorage
-const saveUserToStorage = (user) => {
-  try {
-    if (user) {
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
-    } else {
-      localStorage.removeItem(AUTH_STORAGE_KEY);
-    }
-  } catch (error) {
-    console.error('Error saving user to localStorage:', error);
-  }
-};
-
-// AuthProvider component
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loginError, setLoginError] = useState('');
 
-  // Load user on component mount
   useEffect(() => {
-    const savedUser = loadUserFromStorage();
-    if (savedUser) {
-      setUser(savedUser);
+    try {
+      const savedUser = getUser();
+      const authState = isAuthenticated();
+      
+      if (savedUser && authState) {
+        setUser(savedUser);
+        console.log('User restored from secure storage:', savedUser.name);
+      }
+    } catch (error) {
+      console.error('Error initializing auth state:', error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, []);
 
-  // Login function
   const login = async (email, password) => {
     setIsLoading(true);
     setLoginError('');
 
     try {
-      // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Find user in mock database
       const foundUser = MOCK_USERS.find(
         u => u.email === email && u.password === password
       );
 
       if (foundUser) {
-        // Remove password from user object before storing
         const userWithoutPassword = {
           id: foundUser.id,
           email: foundUser.email,
-          name: foundUser.name
+          name: foundUser.name,
+          loginTime: new Date().toISOString() 
         };
         
         setUser(userWithoutPassword);
-        saveUserToStorage(userWithoutPassword);
+        storeUser(userWithoutPassword); 
         setLoginError('');
         return true;
       } else {
@@ -82,20 +57,25 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       setLoginError('Login failed. Please try again.');
+      console.error('Login error:', error);
       return false;
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Logout function
   const logout = () => {
     setUser(null);
-    saveUserToStorage(null);
+    storeUser(null); 
     setLoginError('');
   };
 
-  // Clear login error
+  const clearAllData = () => {
+    setUser(null);
+    clearAllSecureData();
+    setLoginError('');
+  };
+
   const clearError = () => {
     setLoginError('');
   };
@@ -107,6 +87,7 @@ export const AuthProvider = ({ children }) => {
     loginError,
     login,
     logout,
+    clearAllData,
     clearError
   };
 
@@ -117,7 +98,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use the AuthContext
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

@@ -18,6 +18,7 @@
 .header-left {
   display: flex;
   align-items: center;
+  gap: 16px;
 }
 
 .app-title {
@@ -27,10 +28,52 @@
   color: white;
 }
 
+.security-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background-color: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.security-icon {
+  color: #22c55e;
+  font-size: 14px;
+}
+
+.security-text {
+  color: #22c55e;
+  font-weight: 500;
+}
+
 .header-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
+}
+
+.info-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 36px;
+  height: 36px;
+}
+
+.info-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .user-info {
@@ -76,6 +119,30 @@
 
 .logout-button:active {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Storage Info Panel */
+.storage-info-panel {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 16px 24px;
+}
+
+.storage-info-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.storage-info-content h4 {
+  color: white;
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+
+.storage-info-content p {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 6px 0;
+  font-size: 14px;
 }
 
 /* Responsive */
