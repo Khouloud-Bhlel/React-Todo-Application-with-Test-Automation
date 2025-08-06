@@ -8,11 +8,11 @@ import todosReducer from './hooks/todosReducer';
 import './styles/TodoList.css';
 
 
-// useMemo nista3imlouha lil performance optimization, 7it t7awel t7seb el todos li 3andek bch ma t3awdich t7seb kol mara
-// useEffect nista3imlouha lil side effects, 7it t7awel t3awd el todos fi localStorage
-// localStorage nista3imlouha lil persistence, 7it t7awel t7fed el todos fi localStorage bch ma tdhich kol mara t3awd el app
-// useReducer nista3imlouha lil state management, 7it t7awel t7kem el todos bch ma tdhich kol mara t3awd el state
-// useRef nista3imlouha lil input focus, 7it t7awel t7kem el focus fi input bch ma tdhich kol mara t3awd el input
+// useMemo nista3imlouha lil performance optimization, t7awel t7seb el todos li 3andek bch ma t3awdich t7seb kol mara
+// useEffect nista3imlouha lil side effects,  t7awel t3awd el todos fi localStorage
+// localStorage nista3imlouha lil persistence,  t7awel t7fed el todos fi localStorage bch ma tdhich kol mara t3awd el app
+// useReducer nista3imlouha lil state management,  t7awel t7kem el todos bch ma tdhich kol mara t3awd el state
+// useRef nista3imlouha lil input focus, t7awel t7kem el focus fi input bch ma tdhich kol mara t3awd el input
 const STORAGE_KEY = process.env.REACT_APP_STORAGE_KEY || 'Todos';
 
 const loadTodosFromStorage = () => {

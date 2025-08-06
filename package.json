@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/Khouloud-Bhlel/React-Todo-Application-with-Test-Automation/issues"
   },
-  "homepage": "https://github.com/Khouloud-Bhlel/React-Todo-Application-with-Test-Automation#readme",
+  "homepage": ".",
   "dependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
