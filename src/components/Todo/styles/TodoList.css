@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  background-color: #000000;
+  min-height: calc(100vh - 80px); /* Account for header */
+  background-color: #f8fafc;
   padding: 20px;
   font-family: sans-serif;
 }

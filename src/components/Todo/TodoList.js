@@ -1,10 +1,7 @@
-import { useReducer, useState, useRef, useMemo, useEffect } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt, FaEdit } from "react-icons/fa";
-import { useAddTodo } from './hooks/add';
-import { useDeleteTodo } from './hooks/delete';
-import { useChangeTodo } from './hooks/change';
-import todosReducer from './hooks/todosReducer';
+import { useTodoContext } from './TodoContext';
 import './styles/TodoList.css';
 
 
@@ -13,38 +10,44 @@ import './styles/TodoList.css';
 // localStorage nista3imlouha lil persistence,  t7awel t7fed el todos fi localStorage bch ma tdhich kol mara t3awd el app
 // useReducer nista3imlouha lil state management,  t7awel t7kem el todos bch ma tdhich kol mara t3awd el state
 // useRef nista3imlouha lil input focus, t7awel t7kem el focus fi input bch ma tdhich kol mara t3awd el input
-const STORAGE_KEY = process.env.REACT_APP_STORAGE_KEY;
-
-const loadTodosFromStorage = () => {
-  try {
-    const savedTodos = localStorage.getItem(STORAGE_KEY);
-    return savedTodos ? JSON.parse(savedTodos) : [];
-  } catch (error) {
-    console.error('Error loading todos from localStorage:', error);
-    return [];
-  }
-};
-
-const saveTodosToStorage = (todos) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-  } catch (error) {
-    console.error('Error saving todos to localStorage:', error);
-  }
-};
+// useState nista3imlouha lil state management, t7awel t7kem el state fi component bch ma tdhich kol mara t3awd el component
+// useContext nista3imlouha lil context management, t7awel t7kem el context fi component bch ma tdhich kol mara t3awd el context
 
 const TodoList = () => {
-  const [todos, dispatch] = useReducer(todosReducer, [], loadTodosFromStorage);
-  const [filter, setFilter] = useState('all'); 
+  const { todos, addTodo, updateTodo, deleteTodo, toggleTodo } = useTodoContext();
+  const [filter, setFilter] = useState('all');
+  const [todoInput, setTodoInput] = useState('');
+  const [editingTodo, setEditingTodo] = useState(null);
   const inputRef = useRef(null);
-  
-  const { todoInput, setTodoInput, editingTodo, handleAddOrUpdateTodo, handleEditTodo } = useAddTodo(dispatch, inputRef);
-  const { handleDeleteTodo } = useDeleteTodo(dispatch);
-  const { handleToggleDone } = useChangeTodo(dispatch);
-  
-  useEffect(() => {
-    saveTodosToStorage(todos);
-  }, [todos]);
+
+  // Handler functions
+  const handleAddOrUpdateTodo = (e) => {
+    e.preventDefault();
+    if (!todoInput.trim()) return;
+
+    if (editingTodo) {
+      updateTodo({ ...editingTodo, text: todoInput });
+      setEditingTodo(null);
+    } else {
+      addTodo(todoInput);
+    }
+    setTodoInput('');
+    inputRef.current.focus();
+  };
+
+  const handleEditTodo = (todo) => {
+    setTodoInput(todo.text);
+    setEditingTodo(todo);
+    inputRef.current.focus();
+  };
+
+  const handleDeleteTodo = (id) => {
+    deleteTodo(id);
+  };
+
+  const handleToggleDone = (todo) => {
+    toggleTodo(todo);
+  };
 
  
 
