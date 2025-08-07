@@ -1,7 +1,7 @@
 import { useState, useRef, useMemo } from 'react';
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt, FaEdit } from "react-icons/fa";
-import { useTodoContext } from './TodoContext';
+import { useTodoContext } from './hooks/TodoContext';
 import './styles/TodoList.css';
 
 

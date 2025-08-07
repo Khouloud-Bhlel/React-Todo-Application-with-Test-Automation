@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer, useEffect } from 'react';
-import { storeTodos, getTodos } from '../../utils/secureStorage';
-import todosReducer from './hooks/todosReducer';
+import { storeTodos, getTodos } from '../../../utils/secureStorage';
+import todosReducer from './todosReducer';
 
 const TodoContext = createContext();
 
