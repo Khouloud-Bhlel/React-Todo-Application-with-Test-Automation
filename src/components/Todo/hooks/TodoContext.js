@@ -4,6 +4,9 @@ import todosReducer from './todosReducer';
 
 const TodoContext = createContext();
 
+//les context houma les donnéee eli mawjoudin fil provider 
+// (les ensenble des fonction des donnée fil components) eli y5alina naxcadiw 
+// lil provider apartire mil a9reb valeur ki nista3imlou useContext 
 export const TodoProvider = ({ children }) => {
   const [todos, dispatch] = useReducer(todosReducer, [], getTodos);
 

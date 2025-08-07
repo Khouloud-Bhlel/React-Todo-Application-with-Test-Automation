@@ -1,6 +1,5 @@
-import React from 'react';
 import { AuthProvider, useAuth } from './components/Auth/AuthContext';
-import { TodoProvider } from './components/Todo/TodoContext';
+import { TodoProvider } from './components/Todo/hooks/TodoContext';
 import LoginScreen from './components/Auth/LoginScreen';
 import TodoList from './components/Todo/TodoList';
 import Header from './components/Common/Header';
