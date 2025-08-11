@@ -1,9 +1,8 @@
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef } from 'react';
 import { CiCirclePlus } from "react-icons/ci";
 import { FaRegTrashAlt, FaEdit } from "react-icons/fa";
-import { useTodoContext } from './hooks/TodoContext';
+import { useTodos } from './TodoContext';
 import './styles/TodoList.css';
-
 
 // useMemo nista3imlouha lil performance optimization, t7awel t7seb el todos li 3andek bch ma t3awdich t7seb kol mara
 // useEffect nista3imlouha lil side effects,  t7awel t3awd el todos fi localStorage
@@ -14,59 +13,81 @@ import './styles/TodoList.css';
 // useContext nista3imlouha lil context management, t7awel t7kem el context fi component bch ma tdhich kol mara t3awd el context
 
 const TodoList = () => {
-  const { todos, addTodo, updateTodo, deleteTodo, toggleTodo } = useTodoContext();
-  const [filter, setFilter] = useState('all');
+  const { 
+    filteredTodos, 
+    addTodo, 
+    updateTodo, 
+    deleteTodo, 
+    toggleTodo, 
+    filter, 
+    setFilter, 
+    isLoading, 
+    error, 
+    clearError 
+  } = useTodos();
+
   const [todoInput, setTodoInput] = useState('');
   const [editingTodo, setEditingTodo] = useState(null);
   const inputRef = useRef(null);
 
   // Handler functions
-  const handleAddOrUpdateTodo = (e) => {
+  const handleAddOrUpdateTodo = async (e) => {
     e.preventDefault();
     if (!todoInput.trim()) return;
 
-    if (editingTodo) {
-      updateTodo({ ...editingTodo, text: todoInput });
-      setEditingTodo(null);
-    } else {
-      addTodo(todoInput);
+    try {
+      if (editingTodo) {
+        await updateTodo(editingTodo.id, { text: todoInput });
+        setEditingTodo(null);
+      } else {
+        await addTodo(todoInput);
+      }
+      setTodoInput('');
+      inputRef.current?.focus();
+    } catch (error) {
+      console.error('Error saving todo:', error);
     }
-    setTodoInput('');
-    inputRef.current.focus();
   };
 
   const handleEditTodo = (todo) => {
     setTodoInput(todo.text);
     setEditingTodo(todo);
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
-  const handleDeleteTodo = (id) => {
-    deleteTodo(id);
-  };
-
-  const handleToggleDone = (todo) => {
-    toggleTodo(todo);
-  };
-
- 
-
-  const filteredTodos = useMemo(() => {
-    switch (filter) {
-      case 'completed':
-        return todos.filter(todo => todo.done);
-      case 'active':
-        return todos.filter(todo => !todo.done);
-      case 'all':
-      default:
-        return todos;
+  const handleDeleteTodo = async (id) => {
+    try {
+      await deleteTodo(id);
+    } catch (error) {
+      console.error('Error deleting todo:', error);
     }
-  }, [todos, filter]);
+  };
+
+  const handleToggleDone = async (todo) => {
+    try {
+      await toggleTodo(todo.id);
+    } catch (error) {
+      console.error('Error toggling todo:', error);
+    }
+  };
 
   return (
     <div className="todo-container" id="todo-container">
+      {error && (
+        <div className="error-message" style={{ color: 'red', padding: '10px', marginBottom: '10px' }}>
+          {error}
+          <button onClick={clearError} style={{ marginLeft: '10px' }}>×</button>
+        </div>
+      )}
+      
       <div className="todo-wrapper" id="todo-wrapper">
         <h1 className="todo-title" id="todo-title">To-Do test Creation</h1>
+
+        {isLoading && (
+          <div className="loading-indicator" style={{ textAlign: 'center', padding: '10px' }}>
+            Loading...
+          </div>
+        )}
 
         <form onSubmit={handleAddOrUpdateTodo} className="todo-form" id="todo-form">
           <input
@@ -77,8 +98,9 @@ const TodoList = () => {
             placeholder="Add a new todo..."
             className="todo-input"
             id="todo-input"
+            disabled={isLoading}
           />
-          <button type="submit" className="todo-submit-btn" id="todo-submit-btn">
+          <button type="submit" className="todo-submit-btn" id="todo-submit-btn" disabled={isLoading}>
             {editingTodo ? (
               <>
                 <FaEdit size={20} id="edit-icon" />
@@ -93,31 +115,33 @@ const TodoList = () => {
           </button>
         </form>
 
-        {todos.length > 0 && (
-          <div className="filter-container" id="filter-container">
-            <button
-            id="filter-all"
-              onClick={() => setFilter('all')}
-              className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-            >
-              All
-            </button>
-            <button
-              id="filter-active"
-              onClick={() => setFilter('active')}
-              className={`filter-btn ${filter === 'active' ? 'active' : ''}`}
-            >
-              Active
-            </button>
-            <button
-              id="filter-completed"
-              onClick={() => setFilter('completed')}
-              className={`filter-btn ${filter === 'completed' ? 'active' : ''}`}
-            >
-              Completed
-            </button>
-          </div>
-        )}
+        {/* Stats - always visible */}
+        
+
+        {/* Filter buttons - always visible */}
+        <div className="filter-container" id="filter-container">
+          <button
+          id="filter-all"
+            onClick={() => setFilter('all')}
+            className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+          >
+            All
+          </button>
+          <button
+            id="filter-active"
+            onClick={() => setFilter('active')}
+            className={`filter-btn ${filter === 'active' ? 'active' : ''}`}
+          >
+            Active
+          </button>
+          <button
+            id="filter-completed"
+            onClick={() => setFilter('completed')}
+            className={`filter-btn ${filter === 'completed' ? 'active' : ''}`}
+          >
+            Completed
+          </button>
+        </div>
 
         <ul className="todo-list" id="todo-list">
           {filteredTodos.map(todo => (
@@ -126,10 +150,11 @@ const TodoList = () => {
                 <input
                   id={`todo-checkbox-${todo.id}`}
                   type="checkbox"
-                  checked={todo.done}
+                  checked={todo.completed}
                   onChange={() => handleToggleDone(todo)}
+                  disabled={isLoading}
                 />
-                <div className={`todo-text ${todo.done ? 'completed' : ''}`} id={`todo-text-${todo.id}`}>
+                <div className={`todo-text ${todo.completed ? 'completed' : ''}`} id={`todo-text-${todo.id}`}>
                   {todo.text}
                 </div>
               </div>
@@ -139,6 +164,7 @@ const TodoList = () => {
                   id={`edit-btn-${todo.id}`}
                   onClick={() => handleEditTodo(todo)}
                   className="action-btn"
+                  disabled={isLoading}
                 >
                   <FaEdit size={20} id={`edit-icon-${todo.id}`} />
                 </button>
@@ -146,6 +172,7 @@ const TodoList = () => {
                   id={`delete-btn-${todo.id}`}
                   onClick={() => handleDeleteTodo(todo.id)}
                   className="action-btn"
+                  disabled={isLoading}
                 >
                   <FaRegTrashAlt size={20} id={`delete-icon-${todo.id}`} />
                 </button>
